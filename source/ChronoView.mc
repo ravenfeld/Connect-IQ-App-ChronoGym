@@ -33,11 +33,19 @@ class ChronoView extends Ui.View {
 			topText(go, dc);
     	}
     	
-        if(model.status==:Pause || model.status==:Stop) {
+    	if(model.status==:Start) {
+    		dc.setColor(Gfx.COLOR_GREEN, Gfx.COLOR_TRANSPARENT);
+    		var cx = dc.getWidth() / 2;
+        	var cy = dc.getHeight() / 2;
+    		var triangle = [ [cx-30,cy-40], [cx+50,cy],[cx-30,cy+40] ];
+        	dc.fillPolygon(triangle);
+        	dc.setPenWidth(5);
+        	dc.drawCircle(cx,cy,cy); 
+    	}else if(model.status==:Pause || model.status==:Stop){
         	dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_TRANSPARENT);
         	var cx = dc.getWidth() / 2;
         	var cy = dc.getHeight() / 2;
-        	dc.fillRectangle(cx-50, cy-50, 100, 100);
+        	dc.fillRectangle(cx-40, cy-40, 80, 80);
         	dc.setPenWidth(5);
         	dc.drawCircle(cx,cy,cx); 
         }

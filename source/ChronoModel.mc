@@ -34,17 +34,22 @@ class ChronoModel{
 
 	function startSession(){
 		status=:Start;
+		session.start();
+		refreshTimer.stop();
 		refreshTimer.start(method(:refresh), 1000, true);
 		startBuzz();
 		Ui.requestUpdate();
 	}
 	
 	function stopSession(){
-		status=:Pause;
+		if(model.status!=:Stop) {
+			status=:Pause;
+		}
 		session.stop();
 		refreshTimer.stop();
         displayTimer.stop();
         displayTimer.start(method(:displayMenu), 3000, false);
+        stopBuzz();
         Ui.requestUpdate();
 	}
 	
@@ -64,11 +69,11 @@ class ChronoModel{
 	}
 
 	function refresh(){
+		status=:Work;
 		if (counter > 1){
 			counter--;
 		} else {
 			if (phase == :Prep) {
-				session.start();
 				phase = :Work;
 				counter = workTime;
 				round++;
@@ -81,7 +86,6 @@ class ChronoModel{
 				if (round == roundTotal){
 					stopSession();
 					status=:Stop;
-					stopBuzz();
 				} else {
 					phase = :Work;
 					counter = workTime;
