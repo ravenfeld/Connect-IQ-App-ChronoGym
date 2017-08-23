@@ -9,6 +9,9 @@
     <string id="Restart">Recommencer</string>
     <string id="Interval">Intervalle</string>
     <string id="Rest">Repos</string>
+    <string id="EditInterval">Modifier intervalle</string>
+    <string id="EditRest">Modifier repos</string>
+    <string id="EditRepeat">Répétitions</string>
     <string id="Repeat">Répéter</string>
     <string id="Edit">Modifier</string>
     <string id="StartTitle">$1$x$2$\n$3$ repos</string>
