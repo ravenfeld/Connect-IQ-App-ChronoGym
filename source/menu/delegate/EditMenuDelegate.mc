@@ -9,9 +9,9 @@ class EditMenuDelegate extends MenuDelegate {
 	
     function initialize(menu) {
         MenuDelegate.initialize(menu);
-        interval = Ui.loadResource(Rez.Strings.Interval);
-        rest = Ui.loadResource(Rez.Strings.Rest);
-        repeat = Ui.loadResource(Rez.Strings.Repeat);
+        interval = Ui.loadResource(Rez.Strings.EditInterval);
+        rest = Ui.loadResource(Rez.Strings.EditRest);
+        repeat = Ui.loadResource(Rez.Strings.EditRepeat);
     }
 
     function onMenuItem(item) {

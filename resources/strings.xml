@@ -10,6 +10,9 @@
     <string id="Interval">Interval</string>
     <string id="Rest">Rest</string>
     <string id="Repeat">Repeat</string>
+    <string id="EditInterval">Edit interval</string>
+    <string id="EditRest">Edit rest</string>
+    <string id="EditRepeat">Edit repeat</string>
     <string id="Edit">Edit</string>
     <string id="StartTitle">$1$x$2$\n$3$ rest</string>
     <string id="Start">Start</string>
