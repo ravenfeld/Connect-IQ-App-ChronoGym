@@ -1,0 +1,18 @@
+<strings>
+    <string id="AppName">Chrono Gym</string>
+    <string id="Sport">Entraînement Cardio</string>
+    <string id="EndMenuTitle">Fini</string>
+    <string id="PauseMenuTitle">Pause</string>
+    <string id="Continue">Reprendre</string>
+    <string id="Save">Enregistrer</string>
+    <string id="Ignore">Ignorer</string>
+    <string id="Restart">Recommencer</string>
+    <string id="Interval">Intervalle</string>
+    <string id="Rest">Repos</string>
+    <string id="Repeat">Répéter</string>
+    <string id="Edit">Modifier</string>
+    <string id="StartTitle">$1$x$2$\n$3$ repos</string>
+    <string id="Start">Lancer</string>
+    <string id="Prep">Prep</string>
+    <string id="Go">Go</string>
+</strings>

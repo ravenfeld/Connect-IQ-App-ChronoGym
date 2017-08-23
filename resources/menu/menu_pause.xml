@@ -1,0 +1,5 @@
+<menu id="PauseMenu" title="@Strings.PauseMenuTitle">
+    <menu-item id="Continue">@Strings.Continue</menu-item>
+    <menu-item id="Save">@Strings.Save</menu-item>
+    <menu-item id="Ignore">@Strings.Ignore</menu-item>
+</menu>

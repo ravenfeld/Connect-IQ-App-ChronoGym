@@ -1,0 +1,18 @@
+<strings>
+    <string id="AppName">Chrono Gym</string>
+    <string id="Sport">Cardio Workout</string>
+    <string id="EndMenuTitle">Done</string>
+    <string id="PauseMenuTitle">Pause</string>
+    <string id="Continue">Continue</string>
+    <string id="Save">Save</string>
+    <string id="Ignore">Ignore</string>
+    <string id="Restart">Restart</string>
+    <string id="Interval">Interval</string>
+    <string id="Rest">Rest</string>
+    <string id="Repeat">Repeat</string>
+    <string id="Edit">Edit</string>
+    <string id="StartTitle">$1$x$2$\n$3$ rest</string>
+    <string id="Start">Start</string>
+    <string id="Prep">Prep</string>
+    <string id="Go">Go</string>
+</strings>

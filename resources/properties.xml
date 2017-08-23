@@ -1,0 +1,7 @@
+<resources> 
+	<properties> 
+		<property id="restTime" type="number">5</property>
+		<property id="intervalTime" type="number">60</property>
+		<property id="round" type="number">1</property>
+	</properties>
+</resources>		
