@@ -16,11 +16,11 @@ class EditMenuDelegate extends MenuDelegate {
 
     function onMenuItem(item) {
     	if(item.id == :Interval){
-    		Ui.pushView(new TimePicker(interval,"intervalTime"), new TimePickerDelegate("intervalTime"), Ui.SLIDE_LEFT);
+    		Ui.pushView(new TimePicker(interval,"intervalTime"), new TimePickerDelegate("intervalTime"), Ui.SLIDE_IMMEDIATE);
     	}else if(item.id == :Rest){
-    		Ui.pushView(new TimePicker(rest,"restTime"), new TimePickerDelegate("restTime"), Ui.SLIDE_LEFT);
+    		Ui.pushView(new TimePicker(rest,"restTime"), new TimePickerDelegate("restTime"), Ui.SLIDE_IMMEDIATE);
     	}else if(item.id == :Repeat){
-    		Ui.pushView(new NumberPicker(repeat,"round"), new NumberPickerDelegate("round"), Ui.SLIDE_LEFT);
+    		Ui.pushView(new NumberPicker(repeat,"round"), new NumberPickerDelegate("round"), Ui.SLIDE_IMMEDIATE);
     	}
     }
 }
