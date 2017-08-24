@@ -6,6 +6,11 @@ class ChronoView extends Ui.View {
 	hidden var prep;
 	hidden var go;
 	hidden var rest;
+	hidden var text_width_10;
+	hidden var text_width_1;
+	hidden var text_width_point;
+	hidden var cx;
+	hidden var cy;
 	
     function initialize () {
         View.initialize();
@@ -20,10 +25,17 @@ class ChronoView extends Ui.View {
 		}
 	}
     
+    function onLayout(dc) {
+		cx = dc.getWidth() / 2;
+		cy = dc.getHeight() / 2;
+    	text_width_10 = dc.getTextWidthInPixels("88",Gfx.FONT_NUMBER_THAI_HOT);
+    	text_width_1 = dc.getTextWidthInPixels("8",Gfx.FONT_NUMBER_THAI_HOT);
+    	text_width_point = dc.getTextWidthInPixels(":",Gfx.FONT_NUMBER_THAI_HOT);
+    }
     function onUpdate (dc) {
   	    bgColor(dc, model.phase);
   	    
-  	  	largeText(Utils.timeToString(model.counter), dc);
+  	  	drawTime(model.counter, dc);
     	bottomText("" + model.round + "/" + model.roundTotal, dc);
 		if (model.phase == :Prep) {
 			topText(prep, dc);
@@ -34,8 +46,6 @@ class ChronoView extends Ui.View {
     	}
     	
     	if(model.status==:Start) {
-    		var cx = dc.getWidth() / 2;
-        	var cy = dc.getHeight() / 2;
         	dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT);
         	dc.setPenWidth(4);
         	dc.drawLine(cx-30-2,cy-40-2,cx+50+4,cy);
@@ -47,9 +57,6 @@ class ChronoView extends Ui.View {
         	dc.setPenWidth(5);
         	dc.drawCircle(cx,cy,cy); 
     	}else if(model.status==:Pause || model.status==:Stop){
-        	
-        	var cx = dc.getWidth() / 2;
-        	var cy = dc.getHeight() / 2;
         	var size = 80;
         	dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT);
         	dc.setPenWidth(4);
@@ -79,7 +86,25 @@ class ChronoView extends Ui.View {
   	    dc.drawText(dc.getWidth()/2, dc.getHeight()*0.8, Gfx.FONT_LARGE, text, Gfx.TEXT_JUSTIFY_CENTER);
     }
 
-    function largeText(text, dc) {
-        dc.drawText(dc.getWidth()/2, dc.getHeight()*0.25, Gfx.FONT_NUMBER_THAI_HOT, text, Gfx.TEXT_JUSTIFY_CENTER);
+    function drawTime(long, dc) {
+		var seconds = long % 60;
+		var minutes = (long / 60) % 60;
+		var start_x;
+		var start_point;
+		if (minutes>=10) {
+			start_x=(dc.getWidth()-(text_width_10+text_width_point+text_width_10+4))/2;
+			start_point=start_x+text_width_10+2;
+		}else{
+			start_x=(dc.getWidth()-(text_width_1+text_width_point+text_width_10+4))/2;
+			start_point=start_x+text_width_1+2;
+		}
+		
+        dc.drawText(start_x, cy, Gfx.FONT_NUMBER_THAI_HOT, minutes, Gfx.TEXT_JUSTIFY_VCENTER | Gfx.TEXT_JUSTIFY_LEFT);
+        
+        
+        dc.drawText(start_point, cy, Gfx.FONT_NUMBER_THAI_HOT, ":", Gfx.TEXT_JUSTIFY_VCENTER | Gfx.TEXT_JUSTIFY_LEFT);
+        
+        var start_seconds=start_point+text_width_point+2;
+        dc.drawText(start_seconds, cy, Gfx.FONT_NUMBER_THAI_HOT, seconds.format("%02d"), Gfx.TEXT_JUSTIFY_VCENTER | Gfx.TEXT_JUSTIFY_LEFT);
     }
 }
