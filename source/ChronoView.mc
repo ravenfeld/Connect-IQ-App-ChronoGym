@@ -34,18 +34,28 @@ class ChronoView extends Ui.View {
     	}
     	
     	if(model.status==:Start) {
-    		dc.setColor(Gfx.COLOR_GREEN, Gfx.COLOR_TRANSPARENT);
     		var cx = dc.getWidth() / 2;
         	var cy = dc.getHeight() / 2;
+        	dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT);
+        	dc.setPenWidth(4);
+        	dc.drawLine(cx-30-2,cy-40-2,cx+50+4,cy);
+        	dc.drawLine(cx+50+4,cy,cx-30-2,cy+40+4);
+        	dc.drawLine(cx-30-2,cy-40-2,cx-30-2,cy+40+4);
     		var triangle = [ [cx-30,cy-40], [cx+50,cy],[cx-30,cy+40] ];
+    		dc.setColor(Gfx.COLOR_GREEN, Gfx.COLOR_TRANSPARENT);
         	dc.fillPolygon(triangle);
         	dc.setPenWidth(5);
         	dc.drawCircle(cx,cy,cy); 
     	}else if(model.status==:Pause || model.status==:Stop){
-        	dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_TRANSPARENT);
+        	
         	var cx = dc.getWidth() / 2;
         	var cy = dc.getHeight() / 2;
-        	dc.fillRectangle(cx-40, cy-40, 80, 80);
+        	var size = 80;
+        	dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT);
+        	dc.setPenWidth(4);
+        	dc.drawRectangle(cx-size/2-2, cy-size/2-2, size+4, size+4);
+        	dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_TRANSPARENT);
+        	dc.fillRectangle(cx-size/2, cy-size/2, size, size);
         	dc.setPenWidth(5);
         	dc.drawCircle(cx,cy,cx); 
         }
