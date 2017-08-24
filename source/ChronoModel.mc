@@ -12,8 +12,6 @@ class ChronoModel{
 	var prepTime;
 	var workTime;
 	var roundTotal;
-	const HAS_TONES = Attention has :playTone;
-
 	var counter;
 	var round = 0;
 	var phase = :Prep;
@@ -36,25 +34,28 @@ class ChronoModel{
 		status=:Start;
 		session.start();
 		refreshTimer.stop();
+		displayTimer.stop();
 		refreshTimer.start(method(:refresh), 1000, true);
 		startBuzz();
 		Ui.requestUpdate();
 	}
 	
-	function stopSession(){
-		if(model.status!=:Stop) {
+	function stopSession(beep){
+		if (model.status != :Stop) {
 			status=:Pause;
+			if (beep) {
+				stopBuzz();
+			}
 		}
 		session.stop();
 		refreshTimer.stop();
         displayTimer.stop();
         displayTimer.start(method(:displayMenu), 3000, false);
-        stopBuzz();
         Ui.requestUpdate();
 	}
 	
 	function displayMenu(){
-		if(model.status==:Pause){	
+		if (model.status==:Pause) {	
   	        Ui.pushView(new Rez.Menus.PauseMenu(), new PauseEndMenuDelegate(),  Ui.SLIDE_LEFT );
         } else {  	
   	        Ui.pushView(new Rez.Menus.EndMenu(), new PauseEndMenuDelegate(),  Ui.SLIDE_LEFT );
@@ -70,8 +71,11 @@ class ChronoModel{
 
 	function refresh(){
 		status=:Work;
-		if (counter > 1){
+		if (counter > 1) {
 			counter--;
+			if (counter <= 5) {
+				buzz();
+			}
 		} else {
 			if (phase == :Prep) {
 				phase = :Work;
@@ -84,8 +88,9 @@ class ChronoModel{
 				intervalBuzz();
 			}	else if (phase == :Rest) {
 				if (round == roundTotal){
-					stopSession();
 					status=:Stop;
+					stopSession(false);
+					endBuzz();
 				} else {
 					phase = :Work;
 					counter = workTime;
@@ -104,28 +109,40 @@ class ChronoModel{
 	}
 
 	function startBuzz() {
-		var foo = HAS_TONES && beep(Attention.TONE_LOUD_BEEP);
+		beep(Attention.TONE_START);
 		vibrate(1500);
 	}
 
 	function stopBuzz() {
-		var foo = HAS_TONES && beep(Attention.TONE_LOUD_BEEP);
+		beep(Attention.TONE_STOP);
 		vibrate(1500);
 	}
 
-	function intervalBuzz() {
-		var foo = HAS_TONES && beep(Attention.TONE_LOUD_BEEP);
-		vibrate(1000);
+	function endBuzz() {
+		beep(Attention.TONE_SUCCESS);
+		vibrate(1500);
+	}
+	
+	function buzz() {
+		beep(Attention.TONE_LOUD_BEEP);
 	}
 
+	function intervalBuzz() {
+		beep(Attention.TONE_INTERVAL_ALERT);
+		vibrate(1000);
+	}
+	
 	function vibrate(duration) {
-		var vibrateData = [ new Attention.VibeProfile(  100, duration ) ];
-		Attention.vibrate( vibrateData );
+		if(Attention has :vibrate){
+			var vibrateData = [ new Attention.VibeProfile(  100, duration ) ];
+			Attention.vibrate( vibrateData );
+		}
 	}
 
 	function beep(tone) {
-		Attention.playTone(tone);
-		return true;
+		if( Attention has :playTone ){
+			Attention.playTone(tone);
+		}
 	}
 
 	function dropSession() {

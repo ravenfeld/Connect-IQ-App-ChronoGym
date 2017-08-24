@@ -16,7 +16,7 @@ class ChronoView extends Ui.View {
 
 	function onShow () {
 		if(model.status==:Pause || model.status==:Stop) {
-			model.stopSession();
+			model.stopSession(false);
 		}
 	}
     

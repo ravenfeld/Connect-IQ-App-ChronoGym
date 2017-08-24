@@ -10,7 +10,7 @@ class ChronoDelegate extends Ui.BehaviorDelegate {
 		if (model.status == null || model.status == :Pause) {
 			model.startSession();
 		}else {
-			model.stopSession();
+			model.stopSession(true);
 		}
 	}
 
