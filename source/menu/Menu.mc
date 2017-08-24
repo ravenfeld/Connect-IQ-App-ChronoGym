@@ -132,16 +132,14 @@ class Menu extends Ui.View {
 		
 		nextIndex = nextIndex % menuArray.size();
 				
-		if ( !((menuArray.size()-1==index && offset==1) || (index==0 && offset==-1))) {
-			if (offset == 1) {
-				drawMenu.t = 1000;
-				Ui.animate (drawMenu, :t, Ui.ANIM_TYPE_LINEAR, 1000, 0, ANIM_TIME, method(:requestUpdate));
-			} else {
-				drawMenu.t = -1000;
-				Ui.animate (drawMenu, :t, Ui.ANIM_TYPE_LINEAR, -1000, 0, ANIM_TIME, method(:requestUpdate));
-			}
+		if ((offset == 1 && menuArray.size()-1!=index) ||(index==0 && offset==-1)) {
+			drawMenu.t = 1000;
+			Ui.animate (drawMenu, :t, Ui.ANIM_TYPE_LINEAR, 1000, 0, ANIM_TIME, method(:requestUpdate));
+		} else {
+			drawMenu.t = -1000;
+			Ui.animate (drawMenu, :t, Ui.ANIM_TYPE_LINEAR, -1000, 0, ANIM_TIME, method(:requestUpdate));
 		}
-	
+
         requestUpdate();
         index = nextIndex;
 	}
