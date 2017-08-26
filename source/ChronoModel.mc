@@ -17,7 +17,7 @@ class ChronoModel{
 	var phase = :Prep;
 	var status;
 	var session = ActivityRecording.createSession({:sport => ActivityRecording.SPORT_TRAINING, :subSport => ActivityRecording.SUB_SPORT_CARDIO_TRAINING, :name => Ui.loadResource(Rez.Strings.Sport)});
-
+	var menuVisible=false;
 	hidden var refreshTimer = new Timer.Timer();
 	hidden var displayTimer = new Timer.Timer();
 	hidden var sensors = Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);
@@ -55,10 +55,12 @@ class ChronoModel{
 	}
 	
 	function displayMenu(){
-		if (model.status==:Pause) {	
-  	        Ui.pushView(new Rez.Menus.PauseMenu(), new PauseEndMenuDelegate(),  Ui.SLIDE_LEFT );
-        } else {  	
-  	        Ui.pushView(new Rez.Menus.EndMenu(), new PauseEndMenuDelegate(),  Ui.SLIDE_LEFT );
+		if(!menuVisible){
+			if (model.status==:Pause) {	
+  	        	Ui.pushView(new Rez.Menus.PauseMenu(), new PauseEndMenuDelegate(),  Ui.SLIDE_LEFT );
+        	} else {  	
+  	        	Ui.pushView(new Rez.Menus.EndMenu(), new PauseEndMenuDelegate(),  Ui.SLIDE_LEFT );
+        	}
         }
 	}
 	
@@ -109,31 +111,42 @@ class ChronoModel{
 	}
 
 	function startBuzz() {
-		beep(Attention.TONE_START);
+		if(App.getApp().getProperty("beep")){
+			beep(Attention.TONE_START);
+		}
 		vibrate(1500);
+		
 	}
 
 	function stopBuzz() {
-		beep(Attention.TONE_STOP);
+		if(App.getApp().getProperty("beep")){
+			beep(Attention.TONE_STOP);
+		}
 		vibrate(1500);
 	}
 
 	function endBuzz() {
-		beep(Attention.TONE_SUCCESS);
+		if(App.getApp().getProperty("beep")){
+			beep(Attention.TONE_SUCCESS);
+		}
 		vibrate(1500);
 	}
 	
 	function buzz() {
-		beep(Attention.TONE_LOUD_BEEP);
+		if(App.getApp().getProperty("beep") && App.getApp().getProperty("beep5s")){
+			beep(Attention.TONE_LOUD_BEEP);
+		}
 	}
 
 	function intervalBuzz() {
-		beep(Attention.TONE_INTERVAL_ALERT);
+		if(App.getApp().getProperty("beep")){
+			beep(Attention.TONE_INTERVAL_ALERT);
+		}
 		vibrate(1000);
 	}
 	
 	function vibrate(duration) {
-		if(Attention has :vibrate){
+		if(Attention has :vibrate && App.getApp().getProperty("vibrate")){
 			var vibrateData = [ new Attention.VibeProfile(  100, duration ) ];
 			Attention.vibrate( vibrateData );
 		}

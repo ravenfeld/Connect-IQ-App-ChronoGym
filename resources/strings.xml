@@ -18,4 +18,10 @@
     <string id="Start">Start</string>
     <string id="Prep">Prep</string>
     <string id="Go">Go</string>
+    <string id="Bip">Sound</string>
+    <string id="Bip5s">Sound 5'</string>
+    <string id="Vibrate">Vibrate</string>
+    <string id="Alarms">Alarms</string>
+    <string id="Enable">Enable</string>
+    <string id="Disable">Disable</string>
 </strings>

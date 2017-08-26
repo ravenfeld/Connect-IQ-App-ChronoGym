@@ -3,5 +3,8 @@
 		<property id="restTime" type="number">5</property>
 		<property id="intervalTime" type="number">60</property>
 		<property id="round" type="number">1</property>
+		<property id="vibrate" type="boolean">true</property>
+		<property id="beep" type="boolean">true</property>
+		<property id="beep5s" type="boolean">true</property>
 	</properties>
 </resources>		

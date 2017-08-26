@@ -120,7 +120,7 @@ class Menu extends Ui.View {
 		return null;
 	}
 	
-	const ANIM_TIME = 0.3;
+	const ANIM_TIME = 0.2;
 	function updateIndex (offset) {
 		if (menuArray.size () <= 1) {
 			return;
