@@ -39,5 +39,6 @@ class AlarmMenuDelegate extends MenuDelegate {
 			Ui.popView (Ui.SLIDE_LEFT);
 			return true;
 		}
+		return false;
 	}
 }
