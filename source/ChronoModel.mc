@@ -85,33 +85,42 @@ class ChronoModel{
 				phase = :Work;
 				counter = workTime;
 				round++;
-				intervalBuzz();
+				lap();
 			} else if (phase == :Work) {
 				phase = :Rest;
 				counter = restTime;
-				intervalBuzz();
+				lap();
 			}	else if (phase == :Rest) {
 				if (round == roundTotal){
 					status=:Stop;
-					stopSession(false);
-					endBuzz();
+					end();
 				} else {
 					phase = :Work;
 					counter = workTime;
 					round++;
-					intervalBuzz();
+					lap();
 				}
 			}
 		}
 		Ui.requestUpdate();
 	}
 
+	function end(){
+		stopSession(false);
+		endBuzz();
+	}
+	
+	function lap() {
+		session.addLap();
+		intervalBuzz();
+	}
+	
 	function saveSession() {
 		refreshTimer.stop();
 		session.stop();
 		session.save();
 	}
-
+	
 	function startBuzz() {
 		if(App.getApp().getProperty("beep")){
 			beep(Attention.TONE_START);
