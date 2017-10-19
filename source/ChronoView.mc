@@ -54,8 +54,10 @@ class ChronoView extends Ui.View {
     		var triangle = [ [cx-30,cy-40], [cx+50,cy],[cx-30,cy+40] ];
     		dc.setColor(Gfx.COLOR_GREEN, Gfx.COLOR_TRANSPARENT);
         	dc.fillPolygon(triangle);
-        	dc.setPenWidth(5);
-        	dc.drawCircle(cx,cy,cy); 
+        	if(cx==cy){
+        		dc.setPenWidth(5);
+        		dc.drawCircle(cx,cy,cx); 
+        	}
     	}else if(model.status==:Pause || model.status==:Stop){
         	var size = 80;
         	dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT);
@@ -63,8 +65,10 @@ class ChronoView extends Ui.View {
         	dc.drawRectangle(cx-size/2-2, cy-size/2-2, size+4, size+4);
         	dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_TRANSPARENT);
         	dc.fillRectangle(cx-size/2, cy-size/2, size, size);
-        	dc.setPenWidth(5);
-        	dc.drawCircle(cx,cy,cx); 
+        	if(cx==cy){
+        		dc.setPenWidth(5);
+        		dc.drawCircle(cx,cy,cx); 
+        	}
         }
     }
 
