@@ -27,7 +27,7 @@ class ChronoModel{
         restTime = App.getApp().getProperty("restTime");
         workTime = App.getApp().getProperty("intervalTime");
         roundTotal = App.getApp().getProperty("round");
-		prepTime = restTime;
+		prepTime = 5;
 		counter = prepTime;
 	}
 
