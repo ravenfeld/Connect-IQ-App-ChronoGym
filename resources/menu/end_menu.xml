@@ -1,5 +1,5 @@
 <menu id="EndMenu" title="@Strings.EndMenuTitle">
-    <menu-item id="Save">@Strings.Save</menu-item>
-    <menu-item id="Restart">@Strings.Restart</menu-item>
-    <menu-item id="Ignore">@Strings.Ignore</menu-item>
+    <menu-item id="Save" label="@Strings.Save"/>
+    <menu-item id="Restart" label="@Strings.Restart"/>
+    <menu-item id="Ignore" label="@Strings.Ignore"/>
 </menu>
